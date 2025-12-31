@@ -4,7 +4,7 @@ A personal cloud storage platform that supports secure uploads, downloads, and e
 This project follows a modular, service-oriented architecture designed to separate concerns 
 such as authentication, metadata management, storage, and background processing.
 
-![System Architecture](./docs/architecture.png)
+![System Architecture](./Docs/architecture.png)
 
 ### Architecture Overview
 - **Client (Web Browser)**  

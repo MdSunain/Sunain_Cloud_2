@@ -1,0 +1,184 @@
+<!-- uploading  -->
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <!-- Sora -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
+  <!-- Lobster Two -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <!-- Open Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+  <body class="flex text-[#2c2c2c] bg-[#FAFAFA]">
+
+    <nav class="w-64 h-[96vh] m-4 flex flex-col bg-white rounded-2xl shadow px-4 py-6 font-[Sora]">
+
+  <!-- Logo -->
+  <div class="mb-10 px-2">
+    <h1 class="lobster-two-bold-italic text-4xl text-center text-gray-800">
+      sunain-cloud
+    </h1>
+  </div>
+
+  <!-- Main Menu -->
+  <div class="mb-6">
+    <p class="text-xs text-gray-400 uppercase tracking-wide px-2 mb-2">
+      Main Menu
+    </p>
+
+    <a href="/home"
+       class="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#F2F1F0] text-gray-900 font-medium">
+      <img src="/images/home.svg" width="18" />
+      Home
+    </a>
+
+    <a href="/settings"
+       class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#bfbfbf] hover:bg-[#F2F1F0] transition">
+      <img class="opacity-50" src="/images/settings.svg" width="18" />
+      Settings
+    </a>
+  </div>
+
+  <!-- Accounts -->
+  <div>
+    <p class="text-xs text-gray-400 uppercase tracking-wide px-2 mb-2">
+      Accounts
+    </p>
+
+    <a href="/profile"
+       class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#bfbfbf] hover:bg-[#F2F1F0] transition">
+      <img src="/images/profile.svg" width="18" />
+      Profile
+    </a>
+
+    <a href="/about"
+       class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#bfbfbf] hover:bg-[#F2F1F0] transition">
+      <img src="/images/about.svg" width="18" />
+      About
+    </a>
+  </div>
+
+  <!-- Spacer -->
+  <div class="flex-1"></div>
+
+  <!-- Sign out -->
+  <a href="/logout"
+     class="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#F2F1F0] text-gray-900 font-medium hover:bg-gray-200 transition">
+    <img src="/images/logout.svg" width="18" />
+    Sign out
+  </a>
+
+</nav>
+
+<div class="class= flex-1 p-6">
+  <!-- Top Header -->
+    <div class="flex items-center justify-between mb-6">
+
+      <!-- Left: Breadcrumb + Title -->
+      <div>
+        <p class="text-xs font-bold text-[#2c2c2c] mb-1">/ Home</p>
+        <h1 class="text-2xl font-bold text-gray-900">
+          Upload File
+        </h1>
+      </div>
+
+  </div>
+    <hr class="border-gray-200 mb-6">
+
+    <form action="/upload" method="post" enctype="multipart/form-data" class="flex flex-col gap-4">
+          <div class="flex items-center justify-center w-full">
+            <label for="file" class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition">
+              <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg class="w-10 h-10 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                <p class="text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                <p class="text-xs text-gray-500">PNG, JPG, PDF or any file type</p>
+              </div>
+              <input id="file" type="file" name="file" class="hidden" required />
+            </label>
+          </div>
+
+          <!-- File Name Display -->
+          <p id="fileName" class="text-sm text-gray-600 text-center"></p>
+
+          <!-- Buttons -->
+          <div class="flex gap-3 mt-2">
+            <a href="/home" class="flex-1">
+              <button type="button" class=" px-4 py-2 text-[#2c2c2c] bg-[#EFEFEF] rounded-lg text-sm font-medium hover:bg-gray-300 transition">
+                Cancel
+              </button>
+            </a>
+            <button type="submit" class=" flex gap-2 items-center px-6 py-1 bg-[#2c2c2c] text-white rounded-full text-sm font-medium hover:bg-gray-700 transition shadow-lg">
+              Upload
+              <img src="images/send.svg" alt="send" width="18">
+            </button>
+          </div>
+        </form>
+</div>
+   
+      
+    
+
+    <script>
+      // File input display
+      const fileInput = document.getElementById('file');
+      const fileName = document.getElementById('fileName');
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+          fileName.textContent = `Selected: ${e.target.files[0].name}`;
+        } else {
+          fileName.textContent = '';
+        }
+      });
+
+      // Drag and drop
+      const dropZone = fileInput.parentElement;
+      
+      ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, preventDefaults, false);
+      });
+
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, () => {
+          dropZone.classList.add('bg-blue-100', 'border-blue-400');
+        }, false);
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, () => {
+          dropZone.classList.remove('bg-blue-100', 'border-blue-400');
+        }, false);
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        fileInput.files = files;
+        fileName.textContent = `Selected: ${files[0].name}`;
+      }, false);
+    </script>
+  </body>
+</html>
+
+
+

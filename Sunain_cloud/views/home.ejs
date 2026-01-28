@@ -1,0 +1,202 @@
+<!-- authentication -->
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <!-- Sora -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
+  <!-- Lobster Two -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <!-- Open Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="flex text-[#2c2c2c] bg-[#FAFAFA]">
+  <nav class="w-64 h-[96vh] m-4 flex flex-col bg-white rounded-2xl shadow px-4 py-6 font-[Sora]">
+
+  <!-- Logo -->
+  <div class="mb-10 px-2">
+    <h1 class="lobster-two-bold-italic text-4xl text-center text-gray-800">
+      sunain-cloud
+    </h1>
+  </div>
+
+  <!-- Main Menu -->
+  <div class="mb-6">
+    <p class="text-xs text-gray-400 uppercase tracking-wide px-2 mb-2">
+      Main Menu
+    </p>
+
+    <a href="/home"
+       class="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#F2F1F0] text-gray-900 font-medium">
+      <img src="/images/home.svg" width="18" />
+      Home
+    </a>
+
+    <a href="/settings"
+       class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#bfbfbf] hover:bg-[#F2F1F0] transition">
+      <img class="opacity-50" src="/images/settings.svg" width="18" />
+      Settings
+    </a>
+  </div>
+
+  <!-- Accounts -->
+  <div>
+    <p class="text-xs text-gray-400 uppercase tracking-wide px-2 mb-2">
+      Accounts
+    </p>
+
+    <a href="/profile"
+       class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#bfbfbf] hover:bg-[#F2F1F0] transition">
+      <img src="/images/profile.svg" width="18" />
+      Profile
+    </a>
+
+    <a href="/about"
+       class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#bfbfbf] hover:bg-[#F2F1F0] transition">
+      <img src="/images/about.svg" width="18" />
+      About
+    </a>
+  </div>
+
+  <!-- Spacer -->
+  <div class="flex-1"></div>
+
+  <!-- Sign out -->
+  <a href="/logout"
+     class="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#F2F1F0] text-gray-900 font-medium hover:bg-gray-200 transition">
+    <img src="/images/logout.svg" width="18" />
+    Sign out
+  </a>
+
+</nav>
+
+
+
+  <!-- Main Content -->
+  <div class="flex-1 p-6">
+    <!-- Top Header -->
+    <div class="flex items-center justify-between mb-6">
+
+      <!-- Left: Breadcrumb + Title -->
+      <div>
+        <p class="text-xs font-bold text-[#2c2c2c] mb-1">/ Home</p>
+        <h1 class="text-2xl font-bold text-gray-900">
+          Welcome back, <%= user.name || "Sunain" %>!
+        </h1>
+      </div>
+
+      <!-- Right: Upload Button -->
+      <a href="/upload"
+        class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition">
+        <img src="/images/add.svg" alt="upload" width="16">
+        Upload File
+      </a>
+
+    </div>
+
+    <hr class="border-gray-200 mb-6">
+
+    <h2 class="font-medium font-opensans text-xl mb-6">Your Files</h2>
+
+    <!-- Scripted -->
+    <% if (file.length===0) { %>
+      <p class="font-light text-center">No file uploaded yet.</p>
+      <% } else { %>
+        <ul class="flex gap-6 flex-wrap">
+          <% file.forEach(file=> { %>
+            <a href="/view/<%= file._id %>" target="_blank" class="block">
+              <li
+                class="w-56 rounded-xl border border-gray-200 shadow-sm overflow-visible bg-white hover:shadow-md transition relative z-0">
+                <!-- Preview Area -->
+                <div class="bg-[#EFEFEF] h-40 flex items-center justify-center m-2 rounded-md">
+                  <div class="text-center">
+                    <div class="text-2xl font-bold text-[#D3D3D3]  m-2">
+                      <%= file.filename.split('.').pop().toUpperCase() %>
+                    </div>
+                    <div class="text-sm text-[#959595]">
+                      <%= (file.size / 1024).toFixed(0) %>Kb
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Content Area -->
+                <div class="p-4">
+                  <!-- Filename and Menu -->
+                  <div class="flex justify-between items-start gap-2 mb-3">
+                    <h3 class="font-semibold text-sm text-[#2c2c2c] flex-1 line-clamp-2 break-all">
+                      <%= file.filename %>
+                    </h3>
+                    <!-- Menu Button -->
+                    <div class="relative group" onclick="event.stopPropagation()">
+                      <button class="text-gray-400 hover:text-gray-600 p-1">
+                        ⋮
+                      </button>
+                      <!-- Dropdown Menu -->
+                      <div
+                        class="absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
+                        <a href="/download/<%= file._id %>" onclick="event.stopPropagation()"
+                          class="flex items-center gap-1 block px-4 py-2 text-sm text-gray-700 hover:bg-[#F2F1F0] first:rounded-t-lg">
+                          <img src="images/download.svg" alt="download" width="16" height="16">
+                          Download
+                        </a>
+                        <button onclick="shareFile('<%= file._id %>')" onclick="event.stopPropagation()"
+                          class="w-full flex items-center gap-1 text-left px-4 py-2 text-sm text-gray-700 hover:bg-[#F2F1F0]">
+                          <img src="images/share.svg" alt="share" width="16" height="16">
+                          Share
+                        </button>
+                        <form action="/delete/<%= file._id %>" method="POST"
+                          onsubmit="event.stopPropagation(); return confirm('Delete this file?')">
+                          <button type="submit"
+                            class="w-full flex items-center gap-1 px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-b-lg text-left">
+                            <img src="images/delete.svg" alt="delete" width="16" height="16">
+                            Delete
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Timestamp -->
+                  <div class="text-xs text-[#959595]">
+                    <%= file.createdAt.toLocaleString() %>
+                  </div>
+                </div>
+
+                <script>
+                  async function shareFile(fileId) {
+                    const res = await fetch(`/share/${fileId}`, { method: 'POST' });
+                    const data = await res.json();
+                    prompt("Share this link:", data.shareUrl);
+                  }
+                </script>
+              </li>
+            </a>
+            <% }) %>
+        </ul>
+        <% } %>
+
+          <!-- Scripted -->
+          <div class="mt-13">
+
+          </div>
+  </div>
+  </div>
+</body>
+<!-- <script>
+
+  </script> -->
+
+</html>

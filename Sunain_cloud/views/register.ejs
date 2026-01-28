@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
+  </head>
+  <body >
+    
+    <div class="flex flex-col items-center justify-center h-screen bg-gray-100">
+
+        <form action="/register" method="post" class="bg-white p-16  rounded-3xl shadow w-120 flex flex-col items-center">
+          <div class="heading mb-6 text-center">
+            <h2 class="text-2xl font-extrabold text-[#2c2c2c] ">Create a free account</h2>
+            <p class="text-sm mt-1 font-medium text-gray-500">Welcome to Sunain Cloud </p>
+          </div>  
+            <input type="text" name="username" placeholder="username" class="w-80 mb-3 px-6 py-2 text-bold bg-transparent border border-gray-300 focus:outline-none  rounded-full"/>
+            <input type="text" name="email" placeholder="email" class="w-80 mb-3 px-6 py-2  bg-transparent border border-gray-300 focus:outline-none  rounded-full"/>
+            <div class="relative w-80 mb-3">
+              <input type="password" id="passwordField" name="password" placeholder="password" class="w-full px-6 py-2  bg-transparent border border-gray-300 focus:outline-none  rounded-full"/>
+              <button type="button" id="togglePassword" class="absolute right-4 top-2 cursor-pointer">
+                <img src="/images/visible_off.svg" id="eyeIcon" alt="Toggle password" width="20" height="20"/>
+              </button>
+            </div>
+            <input type="submit" class="w-60 mb-3 mt-6 px-6 py-2 text-white bg-[#2c2c2c] font-bold rounded-full shadow-lg" value="Register"/>
+        </form>
+        <p class="mt-8 font-medium text-[#2c2c2c]"> Already have an account?<a href="/login" class=" font-bold text-pink-500"> Login here</a></p>
+        
+    </div>
+
+    <script>
+      const togglePasswordBtn = document.getElementById('togglePassword');
+      const passwordField = document.getElementById('passwordField');
+      const eyeIcon = document.getElementById('eyeIcon');
+      let isPasswordVisible = false;
+
+      togglePasswordBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        isPasswordVisible = !isPasswordVisible;
+        
+        if (isPasswordVisible) {
+          passwordField.type = 'text';
+          eyeIcon.src = '/images/visible.svg';
+        } else {
+          passwordField.type = 'password';
+          eyeIcon.src = '/images/visible_off.svg';
+        }
+      });
+    </script>
+</html>

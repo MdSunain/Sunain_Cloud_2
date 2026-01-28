@@ -177,6 +177,12 @@ MIT
 
 ---
 
+###
+1. The folder does not contain storage, therefore we need to externally create a storage folder such as *storage/chunks/* **Note** this is the only acceptable folder which can store the chunks of cloud 
+
+2. Required libraries - **npm install bcrypt cookie-parser dotenv ejs express fs jsonwebtoken mongoose multer**
+ 
+---
 ### 🏁 Final Note
 
 This project represents a **foundational cloud storage system** built from first principles, focusing on correctness, efficiency, and extensibility.
